@@ -27,6 +27,11 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - Stop a container `docker kill container_name`
 - Remove an image `docker rmi image_id`
 - Remove an image force `docker rmi image_id -f`
+- Run process in a container `sudo docker run --rm -ti ubuntu:latest sleep 5`
+- Run a process, and remove container (--rm) `docker run --rm -ti ubuntu:latest sleep 5`
+- Run a container in detached mode container (--rm) `docker run -d -ti ubuntu:latest bash`
+- Attach to detached container `docker attach container_name`
+- You can exit from container leaving it detached using `CTRL+P; CTRL+Q`
 
 ## Containers to images
 
