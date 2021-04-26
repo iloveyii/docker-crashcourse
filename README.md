@@ -78,4 +78,15 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - Find mapped ports on docker container `docker port echo-server`
 - Open listening UDP port `nc -ulp 5000`
 
-## Networking
+## Container Networking
+
+- Connecting containers directly without connecting to host's tcp stack
+- List default networks `docker network ls`
+- Create a network of animals `docker network create animals`
+- Create catserver and connect to animals network `docker run --rm -ti --net animals --name catserver ubuntu bash`
+- Create dogserver and connect to animals network `docker run --rm -ti --net animals --name dogserver ubuntu:14.04 bash`
+- Let connect using nc `nc -lp 5000` on catserver, and `nc catserver 5000` on dogserver
+- Create another network and connect catserver to it `docker network create catsonlynetwork`
+  - Connect catserver `docker network connect catsonlynetwork catserver`
+  - Create a mycatserver in catsonlynetwork `docker run --rm -ti --net catsonlynetwork --name mycatserver ubuntu:14.04 bash`
+  - Ping inside mycatserver `ping catserver` and `ping dogserver`
