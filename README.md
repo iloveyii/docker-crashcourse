@@ -13,6 +13,7 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 
 - A docker image is a file containing system files
 - A running instance of an image is called container
+- Docker has 3 main commands categories `run|build|...`
 
 ## Commands
 
@@ -32,6 +33,7 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - Run a container in detached mode container (--rm) `docker run -d -ti ubuntu:latest bash`
 - Attach to detached container `docker attach container_name`
 - You can exit from container leaving it detached using `CTRL+P; CTRL+Q`
+- Run image with name `docker run --name webserver -d ubuntu:latest bash -c "lose /etc/passwd"`
 
 ## Containers to images
 
@@ -41,3 +43,39 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
   - Tag/version it `docker tag image_id image_name:v`
 - One step
   - `docker commit contaier_name image_name:v`
+- Remove old containers `docker container prune`
+- Remove old containers etc `docker system prune`
+
+## Output
+
+- Show all the logs from a container `docker logs container_name|container_id` or the hash
+
+## Resources
+
+- Specify how much resources (memory|cpu) can the container use
+- Limit memory 100MB `docker run --memory 100m -ti ubuntu:latest bash`
+- Show the memory usage of container `docker container top container_name`
+- Limit 2 cpus `docker run --cpu-shares 2 -ti ubuntu:latest bash`
+
+## Inspection
+
+- Get PID of container `docker inspect -f '{{.State.Pid}}' container_name_or_id`
+- Find open ports `sudo nsenter -t 15652 -n netstat`
+
+## Exposing ports
+
+- Export port 8080 `sudo docker run --rm -dti -p 7070:80 --name webserver httpd`
+- 3 containers communication using `nc`
+  - First container `docker run --rm -ti -p 5000:5000 -p 6000:6000 --name echo-server ubuntu bash`
+    - Run netcat - pipe through `nc -lp 5000 | nc -lp 6000`
+    - You can install `apt update && apt install netcat`
+  - Second container - sender `docker run --rm -ti --name sender ubuntu:14.04 bash`
+    - But inside second container localhost refers to itself, so to refer to host machine use `host.docker.internal` ; use host ip address if its not working
+    - Send/connet to port 5000 `nc host.docker.internal 5000`
+  - Third container - sender `docker run --rm -ti --name receiver ubuntu:14.04 bash`
+    - Send/connet to port 6000 `nc 192.168.1.245 6000`
+- Dynamic ports, only specify ports from inside container `docker run --rm -ti -p 5000 -p 6000 --name echo-server ubuntu bash`
+- Find mapped ports on docker container `docker port echo-server`
+- Open listening UDP port `nc -ulp 5000`
+
+## Networking
