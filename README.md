@@ -115,3 +115,10 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - Avoid passwords and keys in images
 - Save your needed images locally as it may disappear
 - Download from most trusted sources
+
+# PART 2 : Creating Docker images
+
+- Using docker images is useful but we can create our own images and use it on other places or production servers
+- And to to do so we need Dockerfiles, which make use of scripting commands similar to bash
+- Build an image with tag `docker build -t image_name .`
+- The build process runs a separate copy of image and can skip if that line is run in previous builds (caching with each step). Process start one line will not be running on the next line
