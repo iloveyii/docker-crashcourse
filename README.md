@@ -90,3 +90,28 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
   - Connect catserver `docker network connect catsonlynetwork catserver`
   - Create a mycatserver in catsonlynetwork `docker run --rm -ti --net catsonlynetwork --name mycatserver ubuntu:14.04 bash`
   - Ping inside mycatserver `ping catserver` and `ping dogserver`
+
+## Volumes
+
+- Volumes are like shared folders and not part image (you need ADD cmd for that)
+- There are two types
+  - Persistant : Data exist even if container is shutdown
+  - Ephemeral : Data exist as soon as any container is using it
+- Share a directoy on host with a container `docker run --rm -ti --name file-server -v /home/alex/projects/devops/tmp/shared:/net-shared ubuntu bash`
+- Exit the container and data created in shared / net-shared will exist on host.
+- Shared data between containers: Ephemeral using `volumes-from`
+  - Create a volume on container `docker run -ti -v /shared ubuntu bash`
+  - Now create another container and connect to shared folder of first container `docker run -ti --volumes-from container1_name ubuntu bash`
+  - They both can share data but as soon as both exits the shared directory is also lost.
+
+## Docker Registries
+
+- Store and distribute images
+- Search for images `docker search apache`
+- Pull it `docker pull httpd`
+- Login to docker.io to push your images `docker login`
+- Tag an image `docker tag ubuntu:latest alikth/ubuntu-nc:v2.1.1`
+- Push it to docker hub `docker push alikth/ubuntu-nc:v2.1.1`
+- Avoid passwords and keys in images
+- Save your needed images locally as it may disappear
+- Download from most trusted sources
