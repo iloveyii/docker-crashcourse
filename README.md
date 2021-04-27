@@ -122,3 +122,6 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - And to to do so we need Dockerfiles, which make use of scripting commands similar to bash
 - Build an image with tag `docker build -t image_name .`
 - The build process runs a separate copy of image and can skip if that line is run in previous builds (caching with each step). Process start one line will not be running on the next line
+- Each line is like a call to docker run and only ENV variables are shared
+- Build the dockerfile/Dockerfile `docker build -t welcome_nano .`
+- And lets ssh to it, without bash as it contains CMD `docker run --rm -ti welcome_nano`
