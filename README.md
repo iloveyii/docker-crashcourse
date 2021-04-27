@@ -125,3 +125,6 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - Each line is like a call to docker run and only ENV variables are shared
 - Build the dockerfile/Dockerfile `docker build -t welcome_nano .`
 - And lets ssh to it, without bash as it contains CMD `docker run --rm -ti welcome_nano`
+- ADD a file to docker image while creating, first create todo.txt file
+- Then build Dockerfile as usual `docker build -t welcome_add .`
+- Now ssh to it `docker run --rm -ti welcome_add` and you will see todo.txt opened in nano

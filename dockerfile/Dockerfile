@@ -1,5 +1,4 @@
-FROM debian:sid
-RUN echo "Building a simple docker image"
-RUN apt update -y
-RUN apt install nano -y
-CMD ["/bin/nano", "/tmp/docker.txt"]
+FROM welcome_nano:latest
+RUN echo "ADDing text file to docker image"
+ADD todo.txt /tmp/todo.txt
+CMD ["/bin/nano", "/tmp/todo.txt"]
