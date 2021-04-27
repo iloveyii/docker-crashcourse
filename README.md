@@ -128,3 +128,14 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - ADD a file to docker image while creating, first create todo.txt file
 - Then build Dockerfile as usual `docker build -t welcome_add .`
 - Now ssh to it `docker run --rm -ti welcome_add` and you will see todo.txt opened in nano
+
+## Syntax
+
+## Multiproject Docker files
+
+# PART 3 : Using docker-compose
+
+- Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs
+-
+
+# PART 4 : Kubernetes and the cloud
