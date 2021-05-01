@@ -15,6 +15,15 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - A running instance of an image is called container
 - Docker has 3 main commands categories `run|build|...`
 
+## Install
+
+- `sudo apt-get update`
+- `sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release`
+- ` curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg`
+- `echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
+- `sudo apt-get update`
+- `sudo apt-get install docker-ce docker-ce-cli containerd.io`
+
 ## Commands
 
 - Run a docker image with terminal interactive (ti), with image-name:version `docker run -ti ubuntu:latest bash`
@@ -136,6 +145,10 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 # PART 3 : Using docker-compose
 
 - Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs
--
+
+## Install
+
+- `sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
+- `sudo chmod +x /usr/local/bin/docker-compose`
 
 # PART 4 : Kubernetes and the cloud
