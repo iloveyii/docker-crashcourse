@@ -3,7 +3,11 @@ services:
     node:
         container_name: api_server
         build: .
-        volumes: 
-            - ./src:/src
         ports: 
             - 5000:5000
+        command: bash -c " 
+                npm i
+                && npm start
+            "
+        volumes: 
+            - ./src:/app/src

@@ -1,3 +1,2 @@
-FROM node:latest
-WORKDIR /src/
-CMD [ "npm", "start" ]
+FROM node:10
+WORKDIR /app/src/

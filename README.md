@@ -171,7 +171,7 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - Creating Dockerfile for system/image level configuration, docker-compose.yml for development environment, docker-compose.prod.yml for prod environment, and docker-compose.override.yml
 #### Steps
 - Create a directory nodeapp with three files: Dockerfile, docker-compose.yml, src/server.js
-- Run command `docker-compose up` and browse end point or `curl http://localhost:5000`, and you will see log from running container
+- Run command `docker-compose up --build` and browse end point or `curl http://localhost:5000`, and you will see log from running container
 - But we need live reload in our development and therefore we need to install and use nodemon
 
 ## Install
