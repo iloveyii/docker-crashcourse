@@ -1,13 +1,13 @@
 # Docker
 
-This is a compact tutorial about Docker. There are 4 parts of this tutorial.
+This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 
-1. PART 1 : The basics of using Docker
-2. PART 2 : Creating Docker images
-3. PART 3 : Using docker-compose
-4. PART 4 : Kubernetes and the cloud
+1. CHAPTER 1 : The basics of using Docker
+2. CHAPTER 2 : Creating Docker images
+3. CHAPTER 3 : Using docker-compose
+4. CHAPTER 4 : Kubernetes and the cloud
 
-# PART 1 - The basics
+# CHAPTER 1 - The basics
 
 ## Concepts
 
@@ -140,7 +140,7 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - Save your needed images locally as it may disappear
 - Download from most trusted sources
 
-# PART 2 : Creating Docker images
+# CHAPTER 2 : Creating Docker images
 
 ### Usage
 - Dockerfile is used when we need to create (and configure) an image that does not exist in docker hub
@@ -162,7 +162,7 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 
 ## Multiproject Docker files
 
-# PART 3 : Using docker-compose
+# CHAPTER 3 : Using docker-compose
 
 - Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs. 
 - It contains mainly application level configurations like ports, environment variables, volumes, etc.
@@ -175,4 +175,4 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 - `sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
 - `sudo chmod +x /usr/local/bin/docker-compose`
 
-# PART 4 : Kubernetes and the cloud
+# CHAPTER 4 : Kubernetes and the cloud
