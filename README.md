@@ -120,6 +120,14 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
   - Now create another container and connect to shared folder of first container `docker run -ti --volumes-from container1_name ubuntu bash`
   - They both can share data but as soon as both exits the shared directory is also lost.
 
+  ### Usage
+  - If you want to save/persist even if the container is shutdown e.g mysql data, use 
+    - On command line `docker run -ti -v /data ubuntu:latest bash`, it saves data in /var/lib/docker/volumes
+    - Use in Dockerfile as `VOLUME /data`
+  - If you want to share source code with container while developing, so that the new code is executed in container (without rebuilding image) specify host directory instead of default unlike above
+    - Use in command line `-v /host/dir /container/dir`
+    - You can use in docker-compose.yml for each service
+
 ## Docker Registries
 
 - Store and distribute images
@@ -134,6 +142,11 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 
 # PART 2 : Creating Docker images
 
+### Usage
+- Dockerfile is used when we need to create (and configure) an image that does not exist in docker hub
+- It is used once in only creating the image (deliverable/production ready) and hence it should be considered suitable for system level configuration while docker-compose is for application level configurations. 
+
+### Commands 
 - Using docker images is useful but we can create our own images and use it on other places or production servers
 - And to to do so we need Dockerfiles, which make use of scripting commands similar to bash
 - Build an image with tag `docker build -t image_name .`
@@ -151,7 +164,11 @@ This is a compact tutorial about Docker. There are 4 parts of this tutorial.
 
 # PART 3 : Using docker-compose
 
-- Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs
+- Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs. 
+- It contains mainly application level configurations like ports, environment variables, volumes, etc.
+### Example - Node app
+- We will deploy a simple node app
+- Creating Dockerfile for system/image level configuration, docker-compose.yml for development environment, docker-compose.prod.yml for prod environment, and docker-compose.override.yml
 
 ## Install
 
