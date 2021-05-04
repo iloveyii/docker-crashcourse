@@ -1,2 +1,3 @@
 FROM node:latest
-CMD [ "node", "/src/server.js" ]
+WORKDIR /src/
+CMD [ "npm", "start" ]
