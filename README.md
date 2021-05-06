@@ -177,7 +177,10 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - But we need live reload in our development and therefore we need to install and use nodemon
 
 ### Example - Deploy microservices with load balancer
-- 
+- Create a `haproxy.cfg` file which defines config for load balancer ie frontend proxy and backend servers
+- Add three backend servers to it
+- Add three nodes/services in docker-compose.yml
+- `docker-compose up` will run the fronend lb and the three services
 
 ## Install
 
