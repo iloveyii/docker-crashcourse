@@ -2,12 +2,14 @@ const express = require('express')
 
 
 const app = express();
+const port = process.env.PORT;
+
 app.get('/', (req, res) => {
     console.log('path::/');
-    res.send('Hello world !!!');
+    res.send('Hello world !!! from PORT ' + port);
 });
 
-app.listen(5000, () => {
-    console.log('Server started on port 5000');
+app.listen(port, () => {
+    console.log('Server started on port ' + port);
 }); 
 

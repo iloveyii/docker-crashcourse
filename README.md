@@ -50,7 +50,7 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - Attach to detached container `docker attach container_name`
 - You can exit from container leaving it detached using `CTRL+P; CTRL+Q`
 - Run image with name `docker run --name webserver -d ubuntu:latest bash -c "lose /etc/passwd"`
-
+- SSH to container `docker exec -ti container_name /bin/bash`
 ## Containers to images
 
 - We can make changes/install to a container and then save it to an image
@@ -166,13 +166,18 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 
 - Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs. 
 - It contains mainly application level configurations like ports, environment variables, volumes, etc.
+
 ### Example - Node app
 - We will deploy a simple node app
 - Creating Dockerfile for system/image level configuration, docker-compose.yml for development environment, docker-compose.prod.yml for prod environment, and docker-compose.override.yml
+
 #### Steps
 - Create a directory nodeapp with three files: Dockerfile, docker-compose.yml, src/server.js
 - Run command `docker-compose up --build` and browse end point or `curl http://localhost:5000`, and you will see log from running container
 - But we need live reload in our development and therefore we need to install and use nodemon
+
+### Example - Deploy microservices with load balancer
+- 
 
 ## Install
 
