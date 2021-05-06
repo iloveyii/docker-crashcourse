@@ -167,7 +167,12 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs. 
 - It contains mainly application level configurations like ports, environment variables, volumes, etc.
 
-### Example - Node app
+## Install
+
+- `sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
+- `sudo chmod +x /usr/local/bin/docker-compose`
+
+## Example - Node app
 - We will deploy a simple node app
 - Creating Dockerfile for system/image level configuration, docker-compose.yml for development environment, docker-compose.prod.yml for prod environment, and docker-compose.override.yml
 
@@ -176,15 +181,12 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - Run command `docker-compose up --build` and browse end point or `curl http://localhost:5000`, and you will see log from running container
 - But we need live reload in our development and therefore we need to install and use nodemon
 
-### Example - Deploy microservices with load balancer
+## Example - Deploy microservices with load balancer
 - Create a `haproxy.cfg` file which defines config for load balancer ie frontend proxy and backend servers
 - Add three backend servers to it
 - Add three nodes/services in docker-compose.yml
 - `docker-compose up` will run the fronend lb and the three services
 
-## Install
 
-- `sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
-- `sudo chmod +x /usr/local/bin/docker-compose`
 
 # CHAPTER 4 : Kubernetes and the cloud
