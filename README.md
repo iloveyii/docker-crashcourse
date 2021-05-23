@@ -190,3 +190,4 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 
 
 # CHAPTER 4 : Kubernetes and the cloud
+- See file kubernetes.md
