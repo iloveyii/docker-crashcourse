@@ -127,7 +127,47 @@ kubectl exec # execute a command on a container in a pod
     - Embed version tags
     - Classify an object using tags
 
+### Expose your app publicly
+- Get deplyments `kubectl get deployments`
+- Get services `kubectl get services`
+- To create a new service and expose it to external traffic use `kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080` 
+- Now check services again and you should see external ip (for some reasons it does not show ip but only port)
+- You can test that the app is exposed `curl $(minikube ip):31464`
+
+### Using labels
+- A lable is like a tag that categorise a resource, and one is created by default (for pods) while creating a deployment
+- You can see lables with describe command `kubectl describe deployment`
+- However we can create a lable for resource using label command `kubectl label pod $POD_NAME version=v1`
+- And then query pods/resource based on that label `kubectl get pods -l version=v1`
+
+### Deleting a service
+- A service/resource can be deleted using delete command, a label can be used here also `kubectl delete service -l app=kubernetes-bootcamp`
+- Confirm that service does not exist `kubectl get services`
+- Confirm that the route is not exposed anymore `curl $(minikube ip):31464`
+- However since we delete only service the pod is running and can be confirmed by using exec command to curl inside the pod `kubectl exec -ti $POD_NAME -- curl localhost:8080`
 
 
-    ## Useful links
-    - [docs](https://kubernetes.io/docs/)
+## Scaling up app
+- By default a deployment created one pod but as the users demand increases we need to scale up. Scanling is achieved by increasing replicas in a deployment.
+![scaling](https://d33wubrfki0l68.cloudfront.net/30f75140a581110443397192d70a4cdb37df7bfc/b5f56/docs/tutorials/kubernetes-basics/public/images/module_05_scaling2.svg)
+- When we increase instances/pods of an application we would need a load balancer to distribute the trafic to all Pods.
+- Show deployments and its replicas
+```
+kubectl get deployments
+kubectl get rs
+```
+- Now we will scale a deployment to 4 replicas by using scale command `kubectl scale deployments/kubernetes-bootcamp --replicas=4`
+- You can list replicas and will see it 4 now, we will list pods which would have increased to 4 also `kubectl get pods -o wide`
+- Th replicas set can be seen in deployment also `kubectl describe deployments/kubernetes-bootcamp`
+
+## Load balancing
+- If deleted recreate the service exposing the IP `kubectl expose deployments/kubernetes-bootcamp --type="NodePort" --port 8080`
+- It automagically start load balancing on replicas sets, lets make a few curl requrests `curl $(minikube ip):$NODE_PORT` and it will hit different pods showing that load balancer is working fine.
+- We can scale down by using the same scale command, lets say 2 replicas `kubectl scale deployments/kubernetes-bootcamp --replicas=2`
+- Show deployments/pods to verify scale down `kubectl get deployments`
+
+
+
+
+## Useful links
+- [docs](https://kubernetes.io/docs/)
