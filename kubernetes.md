@@ -91,6 +91,7 @@ kubectl expose deployment balanced --type=LoadBalancer --port=8080
 
 ## Viewing Pods and Nodes
 - When we create a deployment, a pod is created which may contain several containers and few more resources like shared storage and networking
+- Pods run in an isolated private network
 ![pod](https://d33wubrfki0l68.cloudfront.net/fe03f68d8ede9815184852ca2a4fd30325e5d15a/98064/docs/tutorials/kubernetes-basics/public/images/module_03_pods.svg)
 - A node is a vm/physical computer running kubelet (communicates with master) and container runtime like docker (running/creating containers)
 ![node](https://d33wubrfki0l68.cloudfront.net/5cb72d407cbe2755e581b6de757e0d81760d5b86/a9df9/docs/tutorials/kubernetes-basics/public/images/module_03_nodes.svg)
@@ -104,6 +105,28 @@ kubectl logs # print logs from container in a pod
 kubectl exec # execute a command on a container in a pod
 
 ```
+- Get pod names `kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}'`
+- To access any container using proxy `kubectl proxy`
+- To get output of app run curl `curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/`
+- To see the logs from pod `kubectl logs $POD_NAME`
+
 
 ## Create service
 - To make the deployment accessible from the outside (without the proxy) a Service is required
+- A Service in Kubernetes is an abstraction which defines a logical set of Pods and a policy by which to access them. 
+- The set of Pods targeted by a Service is usually determined by a LabelSelector
+- Services can be exposed in different ways by specifying a type in the ServiceSpec:
+    - ClusterIP (default) - Exposes the Service on an internal IP in the cluster. This type makes the Service only reachable from within the cluster.
+    -  NodePort -  Makes a Service accessible from outside(using NAT) the cluster using <NodeIP>:<NodePort>
+    - LoadBalancer - Creates an external load balancer in the current cloud (if supported) and assigns a fixed, external IP to the Service.
+    -ExternalName - Maps the Service to the contents of the externalName field (e.g. `foo.bar.example.com`), by returning a CNAME record with its value. No proxying of any kind is set up. This type requires v1.7 or higher of kube-dns, or CoreDNS version 0.0.8 or higher.
+    - Discovery and routing among dependent Pods (such as the frontend and backend components in an application) is handled by Kubernetes Services.
+    - The services are applied to a group of pods. The grouping of pods is achieved by using labels and selectors and can be used in the following ways:
+        - Designate objects for development, test, and production
+        - Embed version tags
+        - Classify an object using tags
+
+
+
+    ## Useful links
+    - [docs](https://kubernetes.io/docs/)
