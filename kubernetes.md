@@ -75,3 +75,35 @@ kubectl expose deployment balanced --type=LoadBalancer --port=8080
 
 # Kubernetes basics
 ## Create cluster
+- Kubernetes coordinates a highly available cluster of computers that are connected to work as single unit
+- To make use of this new model of deployment, applications need to be packaged in a way that decouples them from individual hosts: they need to be containerized.
+- It consists of two types of resources manily, control plane and nodes
+![cluster](https://d33wubrfki0l68.cloudfront.net/283cc20bb49089cb2ca54d51b4ac27720c1a7902/34424/docs/tutorials/kubernetes-basics/public/images/module_01_cluster.svg)
+- Start cluster `minikube start`
+- Get cluster info `kubectl get cluster-info`
+
+## Create deployment
+- To deploy an app on a cluster you actually create a deployment
+- To create a deployment use `kubectl create deployment depl-name image=image-name:version`
+- See deployments `kubectl get deployments`
+- Setup a proxy to ineract with the API server `kubectl proxy`
+- Use curl in another tab to get version `curl http://localhost:8001/version`
+
+## Viewing Pods and Nodes
+- When we create a deployment, a pod is created which may contain several containers and few more resources like shared storage and networking
+![pod](https://d33wubrfki0l68.cloudfront.net/fe03f68d8ede9815184852ca2a4fd30325e5d15a/98064/docs/tutorials/kubernetes-basics/public/images/module_03_pods.svg)
+- A node is a vm/physical computer running kubelet (communicates with master) and container runtime like docker (running/creating containers)
+![node](https://d33wubrfki0l68.cloudfront.net/5cb72d407cbe2755e581b6de757e0d81760d5b86/a9df9/docs/tutorials/kubernetes-basics/public/images/module_03_nodes.svg)
+## Troubleshooting with kubectl
+- The most common commands are 
+
+```bash
+kubectl get # list resources
+kubectl describe # show detailed info about a resourcse
+kubectl logs # print logs from container in a pod
+kubectl exec # execute a command on a container in a pod
+
+```
+
+## Create service
+- To make the deployment accessible from the outside (without the proxy) a Service is required
