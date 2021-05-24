@@ -13,7 +13,7 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 
 - A docker image is a file containing system files
 - A running instance of an image is called container
-- Docker has 3 main commands categories `run|build|...`
+- Docker has 3 main commands categories `run|build|exec`
 
 ## Install
 
@@ -190,4 +190,4 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 
 
 # CHAPTER 4 : Kubernetes and the cloud
-- See file kubernetes.md
+- See file kubernetes.md [Kubernetes](https://github.com/iloveyii/docker-crashcourse/blob/master/kubernetes.md)
