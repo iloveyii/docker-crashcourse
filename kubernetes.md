@@ -119,12 +119,13 @@ kubectl exec # execute a command on a container in a pod
     - ClusterIP (default) - Exposes the Service on an internal IP in the cluster. This type makes the Service only reachable from within the cluster.
     -  NodePort -  Makes a Service accessible from outside(using NAT) the cluster using <NodeIP>:<NodePort>
     - LoadBalancer - Creates an external load balancer in the current cloud (if supported) and assigns a fixed, external IP to the Service.
-    -ExternalName - Maps the Service to the contents of the externalName field (e.g. `foo.bar.example.com`), by returning a CNAME record with its value. No proxying of any kind is set up. This type requires v1.7 or higher of kube-dns, or CoreDNS version 0.0.8 or higher.
-    - Discovery and routing among dependent Pods (such as the frontend and backend components in an application) is handled by Kubernetes Services.
-    - The services are applied to a group of pods. The grouping of pods is achieved by using labels and selectors and can be used in the following ways:
-        - Designate objects for development, test, and production
-        - Embed version tags
-        - Classify an object using tags
+    - ExternalName - Maps the Service to the contents of the externalName field (e.g. `foo.bar.example.com`), by returning a CNAME record with its value. No proxying of any kind is set up. This type requires v1.7 or higher of kube-dns, or CoreDNS version 0.0.8 or higher.
+
+- Discovery and routing among dependent Pods (such as the frontend and backend components in an application) is handled by Kubernetes Services.
+- The services are applied to a group of pods. The grouping of pods is achieved by using labels and selectors and can be used in the following ways:
+    - Designate objects for development, test, and production
+    - Embed version tags
+    - Classify an object using tags
 
 
 
