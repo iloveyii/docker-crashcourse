@@ -64,7 +64,7 @@ kubectl expose deployment balanced --type=LoadBalancer --port=8080
 - Delete all service  `kubectl delete service hello-minikube`
 - Delete all deployment `kubectl delete deployment hello-minikube`
 
-# Cubectl
+# Kubectl
 - A command line tool to interact (K8s API) and confgure cluster
 ## Install
 - Download the binary `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"`
@@ -165,6 +165,26 @@ kubectl get rs
 - It automagically start load balancing on replicas sets, lets make a few curl requrests `curl $(minikube ip):$NODE_PORT` and it will hit different pods showing that load balancer is working fine.
 - We can scale down by using the same scale command, lets say 2 replicas `kubectl scale deployments/kubernetes-bootcamp --replicas=2`
 - Show deployments/pods to verify scale down `kubectl get deployments`
+
+## Rolling update
+- By default a single pod is made unavailable(during this time loadbalancer/service only route traffic to other pods) and a single pod is created. [A new pod is created first with new image and then other pods are recreated from it]
+- Notice the image version by using describe command `kubectl describe pods`
+- To update a deployment to version 2 we use `set image` command, followed by deployment name and the new image version 
+- `kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2`
+- Check the progress that old pods are terminating `kubectl get pods`
+- Confirm new version using describe command `kubectl get pods | grep Image:`
+- We can also confirm by making curl request to exposed service and see that ouput shows new version. 
+    - Get port by using get service command `kubectl get services` and save in NODE_PORT
+    - Now make curl request to exposed service and you will see v2 `curl $(minikube ip):$NODE_PORT`
+    - The update can be confirmed by running rollout status command `kubectl rollout status deployments/kubernetes-bootcamp`
+
+### Rollback
+- Suppose we did an update but there was a problem and we want to rollback to previous version immediately
+- Lets rollout to non-existing image version 10 `kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=gcr.io/google-samples/kubernetes-bootcamp:v10`
+- You will see that the one pod status is backup `kubectl get pods`
+- To rollback to previous stable version we use rollout undo command `kubectl rollout undo deployments/kubernetes-bootcamp`
+- Check pods and you will see that the new created pod for updates terminated and then disappeard `kubectl get pods`
+
 
 
 
