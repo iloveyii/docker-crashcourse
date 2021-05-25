@@ -186,7 +186,9 @@ kubectl get rs
 - Check pods and you will see that the new created pod for updates terminated and then disappeard `kubectl get pods`
 
 
-
+## Configuration
+- ConfigMaps are used to save application configuration in a central place. And as they may change from env to env, therefore its good to externalize it
+- Secrets are used to save confidential info like credentials and are not committed to git repo.
 
 
 ## Useful links
