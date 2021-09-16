@@ -36,6 +36,16 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - Run a docker image with terminal interactive (ti), with image-name:version `docker run -ti ubuntu:latest bash`
 - List images on the systems `docker images`
 - List running containers on the systems `docker ps`
+- Make spaces by removing unused resources
+
+```
+docker system pruna
+docker image pruna -a
+docker container pruna
+docker volume pruna
+docker network pruna
+
+```
 
 ## Images to containers
 
@@ -51,6 +61,7 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - You can exit from container leaving it detached using `CTRL+P; CTRL+Q`
 - Run image with name `docker run --name webserver -d ubuntu:latest bash -c "lose /etc/passwd"`
 - SSH to container `docker exec -ti container_name /bin/bash`
+
 ## Containers to images
 
 - We can make changes/install to a container and then save it to an image
@@ -116,12 +127,14 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - Share a directoy on host with a container `docker run --rm -ti --name file-server -v /home/alex/projects/devops/tmp/shared:/net-shared ubuntu bash`
 - Exit the container and data created in shared / net-shared will exist on host.
 - Shared data between containers: Ephemeral using `volumes-from`
+
   - Create a volume on container `docker run -ti -v /shared ubuntu bash`
   - Now create another container and connect to shared folder of first container `docker run -ti --volumes-from container1_name ubuntu bash`
   - They both can share data but as soon as both exits the shared directory is also lost.
 
   ### Usage
-  - If you want to save/persist even if the container is shutdown e.g mysql data, use 
+
+  - If you want to save/persist even if the container is shutdown e.g mysql data, use
     - On command line `docker run -ti -v /data ubuntu:latest bash`, it saves data in /var/lib/docker/volumes
     - Use in Dockerfile as `VOLUME /data`
   - If you want to share source code with container while developing, so that the new code is executed in container (without rebuilding image) specify host directory instead of default unlike above
@@ -143,10 +156,12 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 # CHAPTER 2 : Creating Docker images
 
 ### Usage
-- Dockerfile is used when we need to create (and configure) an image that does not exist in docker hub
-- It is used once in only creating the image (deliverable/production ready) and hence it should be considered suitable for system level configuration while docker-compose is for application level configurations. 
 
-### Commands 
+- Dockerfile is used when we need to create (and configure) an image that does not exist in docker hub
+- It is used once in only creating the image (deliverable/production ready) and hence it should be considered suitable for system level configuration while docker-compose is for application level configurations.
+
+### Commands
+
 - Using docker images is useful but we can create our own images and use it on other places or production servers
 - And to to do so we need Dockerfiles, which make use of scripting commands similar to bash
 - Build an image with tag `docker build -t image_name .`
@@ -164,7 +179,7 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 
 # CHAPTER 3 : Using docker-compose
 
-- Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs. 
+- Learning the above commands and concepts are useful and building blocks but practically we use docker-compose to start our services. Its a yaml file which list the configurations of all the services that our application needs.
 - It contains mainly application level configurations like ports, environment variables, volumes, etc.
 
 ## Install
@@ -173,21 +188,23 @@ This is a compact tutorial about Docker. There are 4 chapters in this tutorial.
 - `sudo chmod +x /usr/local/bin/docker-compose`
 
 ## Example - Node app
+
 - We will deploy a simple node app
 - Creating Dockerfile for system/image level configuration, docker-compose.yml for development environment, docker-compose.prod.yml for prod environment, and docker-compose.override.yml
 
 #### Steps
+
 - Create a directory nodeapp with three files: Dockerfile, docker-compose.yml, src/server.js
 - Run command `docker-compose up --build` and browse end point or `curl http://localhost:5000`, and you will see log from running container
 - But we need live reload in our development and therefore we need to install and use nodemon
 
 ## Example - Deploy microservices with load balancer
+
 - Create a `haproxy.cfg` file which defines config for load balancer ie frontend proxy and backend servers
 - Add three backend servers to it
 - Add three nodes/services in docker-compose.yml
 - `docker-compose up` will run the fronend lb and the three services
 
-
-
 # CHAPTER 4 : Kubernetes and the cloud
+
 - See file kubernetes.md [Kubernetes](https://github.com/iloveyii/docker-crashcourse/blob/master/kubernetes.md)
